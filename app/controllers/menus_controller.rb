@@ -9,6 +9,12 @@ class MenusController < ApplicationController
     render json: @menu
   end
 
+  def by_category
+    category = Category.find(params[:category_id])
+    menus = category.menus
+    render json: menus
+  end
+
   def create
     menu = Menu.new(menu_params)
 

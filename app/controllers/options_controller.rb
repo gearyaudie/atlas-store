@@ -9,6 +9,12 @@ class OptionsController < ApplicationController
     render json: @option
   end
 
+  def by_menu
+    menu = Menu.find(params[:menu_id])
+    options = menu.options
+    render json: options
+  end
+
   def create
     option = Option.new(option_params)
 
