@@ -405,7 +405,7 @@ paths:
         "404":
           description: menu not found
 servers:
-  - url: <%= ENV.fetch("SWAGGER_SERVER_URL", "http://localhost:3000") %>
+  - url: "https://atlas-store.onrender.com"
     variables:
       defaultHost:
-        default: <%= ENV.fetch("SWAGGER_SERVER_HOST", "localhost:3000") %>
+        default: "atlas-store.onrender.com"
