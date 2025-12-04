@@ -50,7 +50,7 @@ COPY . .
 RUN bundle exec bootsnap precompile -j 1 app/ lib/
 
 # Precompiling assets for production without secret key base
-RUN FAKE_KEY_BASE=1 bundle exec rails assets:precompile
+RUN FAKE_KEY_BASE=1 bundle exec rails assets:precompile --trace
 
 
 
