@@ -6,7 +6,6 @@
 # docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name atlas_store atlas_store
 
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
-
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
 ARG RUBY_VERSION=3.4.7
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
@@ -51,9 +50,8 @@ COPY . .
 RUN bundle exec bootsnap precompile -j 1 app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
-
-
+ENV SECRET_KEY_BASE=DUMMY_KEY
+RUN bundle exec rails assets:precompile
 
 
 # Final stage for app image
