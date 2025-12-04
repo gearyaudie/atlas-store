@@ -80,9 +80,10 @@ menu_data = [
 ]
 
 puts "Seeding menus..."
+menus = {}
 
 menu_data.each do |m|
-  Menu.create!(
+  record = Menu.create!(
     category_id: categories[m[:category]],
     name: m[:name],
     description: m[:description],
@@ -91,7 +92,66 @@ menu_data.each do |m|
     created_by: "testuser1",
     updated_by: ""
   )
+  menus[m[:name]] = record.id
 end
 
 puts "Menus seeded."
+puts "Seeding complete!"
+
+# --- Seed Options ---
+options_data = 
+[
+	{
+		menu: "Szechuan Mala",
+		name: "Extra Mala Seed",
+		description: "Extra Mala Seed for your Fiery Szechuan-style Mala with bold spices, numbing peppercorns, and rich aromatic heat.",
+		price: 10000,
+		status: "Active",
+		created_by: "testuser1",
+		updated_by: ""	
+	},
+	{
+		menu: "Liang Teh Wang",
+		name: "Extra Sugar",
+		description: "Extra sugar for your Liang Teh Wang",
+		price: 7500,
+		status: "Active",
+		created_by: "testuser1",
+		updated_by: ""
+	},
+	{
+		menu: "Crab Stick",
+		name: "Extra Crab Stick",
+		description: "Just plain old, MORE CRAB STICK",
+		price: 10000,
+		status: "Active",
+		created_by: "testuser1",
+		updated_by: ""
+	},
+	{
+		menu: "Pak Choi",
+		name: "Extra Garlic",
+		description: "Extra Garlic for your Pak Choi",
+		price: 35000,
+		status: "Active",
+		created_by: "testuser1",
+		updated_by: ""
+	}
+];
+
+puts "Seeding options..."
+
+options_data.each do |p|
+  Option.create!(
+    menu_id: menus[p[:menu]],
+    name: p[:name],
+    description: p[:description],
+    price: p[:price],
+    status: p[:status],
+    created_by: "testuser1",
+    updated_by: ""
+  )
+end
+
+puts "Options seeded."
 puts "Seeding complete!"
