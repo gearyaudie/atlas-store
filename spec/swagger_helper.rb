@@ -24,10 +24,10 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: ENV.fetch("SWAGGER_SERVER_URL", "http://localhost:3000"),
+          url: ENV.fetch("SWAGGER_SERVER_URL", "http://atlas-store.onrender.com"),
           variables: {
             defaultHost: {
-              default: ENV.fetch("SWAGGER_SERVER_HOST", "localhost:3000")
+              default: ENV.fetch("SWAGGER_SERVER_HOST", "atlas-store.onrender.com")
             }
           }
         }
