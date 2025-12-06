@@ -171,4 +171,5 @@ RSpec.describe 'Menus API', type: :request do
         run_test!
       end
     end
+  end
 end

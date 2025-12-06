@@ -86,4 +86,5 @@ RSpec.describe 'Categories API', type: :request do
         run_test!
       end
     end
+  end
 end

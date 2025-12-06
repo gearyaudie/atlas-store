@@ -8,9 +8,9 @@ paths:
     get:
       summary: Retrieves all categories
       tags:
-        - Categories
+      - Categories
       responses:
-        "200":
+        '200':
           description: categories found
           content:
             application/json:
@@ -38,18 +38,114 @@ paths:
                       type: string
                       format: date-time
                   required:
+                  - id
+                  - name
+                  - status
+                  - created_at
+                  - updated_at
+  "/categories/{id}/with-menu":
+    get:
+      summary: Retrieves a category and all its menus
+      tags:
+      - Categories
+      parameters:
+      - name: id
+        in: path
+        description: Category ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: category with menus found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  category:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      status:
+                        type: string
+                      created_by:
+                        type: string
+                        nullable: true
+                      updated_by:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+                    required:
                     - id
                     - name
                     - status
                     - created_at
                     - updated_at
+                  menus:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            category_id:
+                              type: integer
+                            name:
+                              type: string
+                            description:
+                              type: string
+                              nullable: true
+                            price:
+                              type: number
+                            status:
+                              type: string
+                            created_by:
+                              type: string
+                              nullable: true
+                            updated_by:
+                              type: string
+                              nullable: true
+                            created_at:
+                              type: string
+                              format: date-time
+                            updated_at:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - category_id
+                          - name
+                          - price
+                          - status
+                      count:
+                        type: integer
+                    required:
+                    - data
+                    - count
+                required:
+                - category
+                - menus
+        '404':
+          description: category not found
   "/menus":
     get:
       summary: Retrieves all menus
       tags:
-        - Menus
+      - Menus
       responses:
-        "200":
+        '200':
           description: menus found
           content:
             application/json:
@@ -84,26 +180,26 @@ paths:
                       type: string
                       format: date-time
                   required:
-                    - id
-                    - name
-                    - price
-                    - status
-                    - category_id
-                    - created_at
-                    - updated_at
+                  - id
+                  - name
+                  - price
+                  - status
+                  - category_id
+                  - created_at
+                  - updated_at
   "/menus/{id}":
     get:
       summary: Retrieves a menu by ID
       tags:
-        - Menus
+      - Menus
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
       responses:
-        "200":
+        '200':
           description: menu found
           content:
             application/json:
@@ -136,28 +232,28 @@ paths:
                     type: string
                     format: date-time
                 required:
-                  - id
-                  - name
-                  - price
-                  - status
-                  - category_id
-                  - created_at
-                  - updated_at
-        "404":
+                - id
+                - name
+                - price
+                - status
+                - category_id
+                - created_at
+                - updated_at
+        '404':
           description: menu not found
   "/categories/{category_id}/menus":
     get:
       summary: Retrieves menus by category ID
       tags:
-        - Menus
+      - Menus
       parameters:
-        - name: category_id
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: category_id
+        in: path
+        required: true
+        schema:
+          type: integer
       responses:
-        "200":
+        '200':
           description: menus found for category
           content:
             application/json:
@@ -192,6 +288,64 @@ paths:
                       type: string
                       format: date-time
                   required:
+                  - id
+                  - name
+                  - price
+                  - status
+                  - category_id
+                  - created_at
+                  - updated_at
+        '404':
+          description: category not found
+  "/menus/{menu_id}/with-options":
+    get:
+      summary: Retrieves a menu and all its options
+      tags:
+      - Menus
+      parameters:
+      - name: menu_id
+        in: path
+        description: Menu ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: menu with options found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  menu:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      description:
+                        type: string
+                        nullable: true
+                      price:
+                        type: number
+                      status:
+                        type: string
+                      category_id:
+                        type: integer
+                      created_by:
+                        type: string
+                        nullable: true
+                      updated_by:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+                    required:
                     - id
                     - name
                     - price
@@ -199,21 +353,65 @@ paths:
                     - category_id
                     - created_at
                     - updated_at
-        "404":
-          description: category not found
+                  options:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            menu_id:
+                              type: integer
+                            name:
+                              type: string
+                            price:
+                              type: number
+                            status:
+                              type: string
+                            created_by:
+                              type: string
+                              nullable: true
+                            updated_by:
+                              type: string
+                              nullable: true
+                            created_at:
+                              type: string
+                              format: date-time
+                            updated_at:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - menu_id
+                          - name
+                          - price
+                          - status
+                      count:
+                        type: integer
+                    required:
+                    - data
+                    - count
+                required:
+                - menu
+                - options
+        '404':
+          description: menu not found
   "/menus/{menu_id}/options":
     get:
       summary: Retrieves options by menu ID
       tags:
-        - Options
+      - Options
       parameters:
-        - name: menu_id
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: menu_id
+        in: path
+        required: true
+        schema:
+          type: integer
       responses:
-        "200":
+        '200':
           description: options found for menu
           content:
             application/json:
@@ -248,17 +446,17 @@ paths:
                       type: string
                       format: date-time
                   required:
-                    - id
-                    - name
-                    - price
-                    - status
-                    - menu_id
-                    - created_at
-                    - updated_at
-        "404":
+                  - id
+                  - name
+                  - price
+                  - status
+                  - menu_id
+                  - created_at
+                  - updated_at
+        '404':
           description: menu not found
 servers:
-  - url: http://atlas-store.onrender.com
-    variables:
-      defaultHost:
-        default: atlas-store.onrender.com
+- url: http://atlas-store.onrender.com
+  variables:
+    defaultHost:
+      default: atlas-store.onrender.com
