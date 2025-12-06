@@ -1,24 +1,29 @@
-# README
+# atlas-store 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+link: https://atlas-store.onrender.com
+link to swagger: https://atlas-store.onrender.com/api-docs/index.html
 
-Things you may want to cover:
+Categories 
+/categories - Get all categories 
+https://atlas-store.onrender.com/categories
 
-* Ruby version
+/categories/{category_id}/with-menu - Get one category with all it's menu
+https://atlas-store.onrender.com/categories/1/with-menu
 
-* System dependencies
+Menu
+/menus - Get all menus
+https://atlas-store.onrender.com/menus
 
-* Configuration
+/menus/{menu_id} - Get one single menu
+https://atlas-store.onrender.com/menus/{menu_id}
 
-* Database creation
+/categories/{category_id}/menus - Get all menus available to a single category
+https://atlas-store.onrender.com/categories/{category_id}/menus
 
-* Database initialization
+/menus/{menu_id}/with-options - Get one single Menu with all it's options
+https://atlas-store.onrender.com/menus/{menu_id}/with-options
 
-* How to run the test suite
+Options
+/menus/{menu_id}/options - Get all options available to a single menu
+https://atlas-store.onrender.com/menus/{menu_id}/options
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
