@@ -27,6 +27,19 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def with_menu 
+    category = Category.includes(:menus).find(params[:category_id])
+    menus = category.menus
+
+    render json: {
+      category: category, 
+      menus: {
+        data: menus,
+        count: menus.count
+      }
+    }
+  end
+
   def destroy
     @category.destroy
     head :no_content

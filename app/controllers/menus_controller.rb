@@ -33,6 +33,19 @@ class MenusController < ApplicationController
     end
   end
 
+  def with_options 
+    menu = Menu.includes(:options).find(params[:menu_id])
+    options = menu.options
+
+    render json: {
+      menu: menu, 
+      options: {
+        data: options,
+        count: options.count
+      }
+    }
+  end
+
   def destroy
     @menu.destroy
     head :no_content
